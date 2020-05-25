@@ -69,12 +69,14 @@ int utf8_next(char **s, unsigned long *codep) {
 	char *sp = *s;
 	unsigned long state = 0;
 	*codep = 0;
-	for (; *sp; ++sp) {
+	for (; *sp; sp++) {
 		const int r = utf8_decode(&state, codep, *sp);
 		if (r < 0)
 			return -1;
-		if (r == 0)
+		if (r == 0) {
+			sp++;
 			break;
+		}
 	}
 	*s = sp;
 	return 0;
