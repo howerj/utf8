@@ -1,4 +1,4 @@
-VERSION = 0x000001ul
+VERSION = 0x010000ul
 CFLAGS  =-std=c99 -Wall -Wextra -pedantic -O2 -DUTF8_VERSION="${VERSION}"
 TARGET  =utf8
 AR      = ar
@@ -8,14 +8,13 @@ DESTDIR = install
 
 .PHONY: all run test clean install dist
 
-
 all: ${TARGET}
 
 run: test
 	${TRACE} ./${TARGET}
 
 test: ${TARGET}
-	./${TARGET}
+	./${TARGET} < /dev/null
 
 main.o: main.c ${TARGET}.h
 
